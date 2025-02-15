@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blackfiresoft.aiproject.blackList.mapper.BlackListMapper">
+   <resultMap id="selectIp" type="com.blackfiresoft.aiproject.blackList.pojo.BlackListModel">
+       <id column="id" jdbcType="BIGINT" property="id"/>
+       <result column="ipaddress" jdbcType="VARCHAR" property="ipaddress"/>
+       <result column="modifytime" jdbcType="TIMESTAMP" property="modifytime"/>
+   </resultMap>
+
+    <insert id="insertIp" parameterType="String">
+        insert into blacklist(ipaddress)values (#{ipaddress})
+    </insert>
+    <delete id="deleteIp" parameterType="Integer">
+        delete from blackList where id in
+        <foreach collection="ids" open="(" close=")" separator="," item="id">
+            #{id}
+        </foreach>
+    </delete>
+    <select id="selectIpOne" resultMap="selectIp" parameterType="String">
+        select * from blackList where ipaddress=#{ipaddress}
+    </select>
+    <select id="selectIpList" resultMap="selectIp">
+        select * from blackList
+    </select>
+
+</mapper>

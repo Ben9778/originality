@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blackfiresoft.aiproject.user.mapper.TextTryCount">
+    <resultMap id="selectCounts" type="com.blackfiresoft.aiproject.user.pojo.TextTryCountModel">
+        <result column="gptCount" jdbcType="INTEGER" property="gptCount"/>
+        <result column="titleCount" jdbcType="INTEGER" property="titleCount"/>
+    </resultMap>
+    <insert id="insertCount" parameterType="String">
+        insert into textTryCount(openid) values(#{openid});
+    </insert>
+    <update id="updateGptCount" parameterType="String">
+        update TextTryCount set gptCount=gptCount-1 where openid=#{openid}
+    </update>
+    <update id="updateTitleCount" parameterType="String">
+        update TextTryCount set titleCount=titleCount-1 where openid=#{openid}
+    </update>
+    <select id="selectCount" resultMap="selectCounts">
+        select gptCount,titleCount from textTryCount where openid=#{openid}
+    </select>
+</mapper>

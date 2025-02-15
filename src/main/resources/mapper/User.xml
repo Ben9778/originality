@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blackfiresoft.aiproject.user.mapper.User">
+    <resultMap id="checkUsers" type="com.blackfiresoft.aiproject.user.pojo.UserModel">
+        <result column="username" jdbcType="VARCHAR" property="username"/>
+        <result column="openid" jdbcType="VARCHAR" property="openid"/>
+    </resultMap>
+    <resultMap id="getVipInfo" type="com.blackfiresoft.aiproject.user.pojo.VipModel">
+        <id column="vid" jdbcType="BIGINT" property="vid"/>
+        <result column="openid" jdbcType="VARCHAR" property="openid"/>
+        <result column="expireTime" jdbcType="TIMESTAMP" property="expireTime"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="create_time"/>
+    </resultMap>
+    <insert id="register">
+        insert into users(username,openid) values(#{username},#{openid});
+    </insert>
+    <select id="checkUser" resultMap="checkUsers">
+        select username,openid from users where openid=#{openid}
+    </select>
+    <!--查询用户的会员信息-->
+    <select id="getUserVipInfo" resultMap="getVipInfo">
+        select * from vips where openid=#{openid}
+    </select>
+    <!--添加会员-->
+    <insert id="insertVip">
+        insert into vips(openid,expireTime) values(#{openid},#{expireTime})
+    </insert>
+    <!--修改会员过期时间-->
+    <update id="updateVipExpireTime">
+        update vips set expireTime=#{expireTime} where openid=#{openid}
+    </update>
+    <!--删除会员-->
+    <delete id="deleteVip">
+        delete from vips where openid=#{openid}
+    </delete>
+</mapper>
