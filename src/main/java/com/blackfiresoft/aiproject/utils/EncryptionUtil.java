@@ -4,6 +4,7 @@ import org.jasypt.encryption.StringEncryptor;
 import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
 import org.jasypt.encryption.pbe.config.PBEConfig;
 import org.jasypt.encryption.pbe.config.SimpleStringPBEConfig;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -19,7 +20,8 @@ public class EncryptionUtil {
     }
 
     public static class DESEncrypt implements StringEncryptor {
-
+        @Value("${jasypt.encryptor.password}")
+        private String password;
         /**
          * SimpleStringPBEConfig是Jasypt中的一个实现类，用于配置PBE算法的参数。
          * 它提供了一些方法，可以设置密码、密钥迭代次数、算法、盐和IV生成器等。您可以使用它来配置PBE算法的参数，
@@ -28,7 +30,7 @@ public class EncryptionUtil {
         private PBEConfig config(){
             SimpleStringPBEConfig config = new SimpleStringPBEConfig();
             //设置秘钥
-            config.setPassword("blackFireSoft");
+            config.setPassword(password);
             //设置加密算法
             config.setAlgorithm("PBEWITHHMACSHA512ANDAES_256");
             //这行代码设置了PBE加密算法从密码中推导密钥的迭代次数。

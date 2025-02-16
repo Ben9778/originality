@@ -19,4 +19,8 @@ mybatis:
 logging:
   config: classpath:logback-spring.xml
 
+jasypt:
+  encryptor:
+    password: ${jasypt.encryptor.password}
+
 

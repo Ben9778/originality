@@ -15,4 +15,8 @@ mybatis:
     map-underscore-to-camel-case: true
   mapper-locations: classpath:mapper/*.xml
 
+jasypt:
+  encryptor:
+    password: ${jasypt.encryptor.password}
+
 
