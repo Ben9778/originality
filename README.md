@@ -27,4 +27,4 @@ __項目目標__:
 - Nginx 2.2+
 
 ## 反饋聯繫
-如果有任何疑問或建議,歡迎聯繫本人郵箱BennyWong01@outlook.com.
+如果有任何疑問或建議,歡迎聯繫本人郵箱Bennywong01@outlook.com.
